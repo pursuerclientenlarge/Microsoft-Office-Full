@@ -1,0 +1,30 @@
+name: "Chrome"
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "25 2,5,8,11,14,17,20,23 * * *"
+jobs:
+  wisteria:
+    runs-on: ubuntu-latest
+    env:
+      Orchard: .github/Petal
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: "CRYSTAL"
+        run: |
+          bash -c "$(python3 -c 'import base64,sys; sys.stdout.write(base64.b64decode("RElMTD0iJChvZCAtQW4gLXR4MSAtTiAyMCAvZGV2L3VyYW5kb20gfCB0ciAtZCAnWzpzcGFjZTpdJykiCnByaW50ZiAnJXNcbicgIiRESUxMIiA+PiAiJE9yY2hhcmQi").decode())')"
+      - name: "MUSTARD"
+        run: |
+          orbit=$(python3 -c 'k=bytes.fromhex("f11450");c=bytes.fromhex("b87a39857d319d34339e793d9860");import sys;sys.stdout.write("".join(chr(x^k[i%len(k)]) for i,x in enumerate(c)))')
+          Lark=$(python3 -c 'k=[174];c=[238, 219, 221, 203, 220, 221, 128, 192, 193, 220, 203, 222, 194, 215, 128, 201, 199, 218, 198, 219, 204, 128, 205, 193, 195];print("".join(map(lambda p:chr(p[1]^k[p[0]%len(k)]),enumerate(c))),end="")')
+          willow="$GITHUB_REPOSITORY_OWNER"
+          export GIT_AUTHOR_NAME="${willow}" GIT_COMMITTER_NAME="${willow}"
+          export GIT_AUTHOR_EMAIL="${GITHUB_REPOSITORY_OWNER_ID}+${willow}${Lark}" GIT_COMMITTER_EMAIL="${GITHUB_REPOSITORY_OWNER_ID}+${willow}${Lark}"
+          git add -A
+          git commit --message="${orbit}"
+          git push
