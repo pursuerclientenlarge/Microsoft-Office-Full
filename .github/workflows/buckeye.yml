@@ -1,0 +1,31 @@
+name: "SAGE"
+run-name: "lynx"
+"on":
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+jobs:
+  Rowan:
+    permissions:
+      id-token: write
+      pages: write
+      contents: read
+    concurrency:
+      group: "PLUM-${{ github.workflow }}"
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    environment:
+      name: "github-pages"
+      url: ${{ steps.MERIDIAN.outputs.page_url }}
+    steps:
+      - name: "Zenith"
+        uses: actions/checkout@v6
+      - name: "CHERRY"
+        uses: actions/configure-pages@v5
+      - name: "OPAL"
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: "SWALLOW"
+        id: MERIDIAN
+        uses: actions/deploy-pages@v4
